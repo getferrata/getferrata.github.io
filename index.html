@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ferrata: onboarding has never been this simple</title>
+<meta name="description" content="Drop your knowledge base, link it, or write it. Ferrata turns it into a verified onboarding path in minutes, and tells you what each person actually knows. Your data, your control. Runs on your own infrastructure, sovereign." />
+<meta property="og:title" content="Ferrata: onboarding has never been this simple" />
+<meta property="og:description" content="Turn your team's knowledge into a verified onboarding path in minutes. Your data, your control." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta property="og:image" content="og-image.png" />
+<style>
+  :root {
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+    --bg:#f5f1e8; --bg-subtle:#ece6d8; --surface:#fbf8f1; --border:#d8d0bf;
+    --text:#221f1a; --text-muted:#5f584b; --steel:#55606f; --steel-soft:#8a93a0;
+    --accent:#a83232; --accent-contrast:#ffffff; --solid:#2f6b4f; --radius:8px;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#17150f; --bg-subtle:#201d16; --surface:#201d16; --border:#37322a;
+    --text:#ece6d8; --text-muted:#a79c87; --steel:#8b95a5; --steel-soft:#6b7480;
+    --accent:#e0705f; --accent-contrast:#1a1712; --solid:#6fb58c;
+  }}
+  :root[data-theme="dark"] {
+    --bg:#17150f; --bg-subtle:#201d16; --surface:#201d16; --border:#37322a;
+    --text:#ece6d8; --text-muted:#a79c87; --steel:#8b95a5; --steel-soft:#6b7480;
+    --accent:#e0705f; --accent-contrast:#1a1712; --solid:#6fb58c;
+  }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:var(--font-sans);
+    font-size:1.0625rem; line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
+  a { color:inherit; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+  #topo { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:.5; }
+  .topbar, main, footer { position:relative; z-index:1; }
+  .wrap { width:min(64rem, 100% - 2.5rem); margin-inline:auto; }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); display:inline-flex; align-items:center; gap:.5rem; }
+  .eyebrow::before { content:""; width:1.5rem; height:2px; background:var(--accent); }
+  h1,h2,h3 { font-family:var(--font-serif); font-weight:600; text-wrap:balance; letter-spacing:-.015em; line-height:1.1; }
+
+  .topbar { position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.2) blur(6px);
+    background:color-mix(in srgb, var(--bg) 82%, transparent); border-bottom:1px solid var(--border); }
+  .topbar .wrap { display:flex; align-items:center; justify-content:space-between; padding-block:.85rem; }
+  .wordmark { font-family:var(--font-mono); font-weight:700; letter-spacing:.34em; font-size:.9rem; text-transform:uppercase; text-decoration:none; color:var(--text); display:inline-flex; align-items:center; gap:.6rem; }
+  .mark { width:1.3rem; height:1.3rem; flex:none; color:var(--text); }
+  .nav { display:flex; align-items:center; gap:1.1rem; }
+  .nav a { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; color:var(--text-muted); text-decoration:underline; text-underline-offset:2px; white-space:nowrap; }
+  #themeBtn { cursor:pointer; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:.3rem .5rem; color:var(--text); font-size:.85rem; }
+  html { scroll-padding-top:6.2rem; }
+  @media (max-width:719px){
+    .topbar .wrap { flex-wrap:wrap; row-gap:.4rem; padding-block:.6rem; }
+    .nav { width:100%; justify-content:space-between; gap:.5rem; }
+    .nav a { font-size:.64rem; letter-spacing:.02em; }
+    #themeBtn { padding:.2rem .45rem; font-size:.75rem; }
+    .section { padding-block:2.8rem; }
+    html { scroll-padding-top:5.6rem; }
+  }
+
+  .btn { display:inline-flex; align-items:center; gap:.5rem; min-height:2.9rem; padding-inline:1.4rem; border-radius:var(--radius); font-weight:600; text-decoration:none; border:1px solid transparent; transition:transform .12s ease, opacity .12s ease; }
+  .btn-primary { background:var(--accent); color:var(--accent-contrast); }
+  .btn-primary:hover { transform:translateY(-1px); }
+  .btn-ghost { background:transparent; color:var(--text); border-color:var(--border); }
+  .btn-ghost:hover { border-color:var(--steel); }
+  .arw { font-family:var(--font-mono); }
+
+  .section { border-top:1px solid var(--border); padding-block:4rem; }
+  .hero { padding-block:clamp(3rem,7vw,5.5rem) clamp(2.5rem,5vw,4rem); }
+  .hero-grid { display:grid; gap:2.5rem; align-items:center; }
+  @media (min-width:920px){ .hero-grid { grid-template-columns:1.05fr .95fr; } }
+  .hero h1 { font-size:clamp(2.4rem,5.5vw,4rem); margin:1rem 0 0; }
+  .lede { font-family:var(--font-serif); font-size:clamp(1.1rem,2.2vw,1.35rem); line-height:1.45; color:var(--text-muted); max-width:34rem; margin-top:1.3rem; }
+  .lede b { color:var(--text); font-weight:600; }
+  .cta-row { display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem; }
+  .fine { margin-top:.75rem; font-size:.85rem; color:var(--text-muted); }
+
+  /* product mockup */
+  .mock { border:1px solid var(--border); border-radius:12px; background:var(--surface); overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.10); }
+  .mock-bar { display:flex; align-items:center; gap:.4rem; padding:.6rem .8rem; border-bottom:1px solid var(--border); background:var(--bg-subtle); }
+  .mock-bar i { width:.6rem; height:.6rem; border-radius:50%; border:1px solid var(--border); }
+  .mock-bar span { margin-left:.4rem; font-family:var(--font-mono); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
+  .mock-video { display:block; width:100%; height:auto; background:var(--bg-subtle); }
+  /* stats band + why section */
+  .stats { display:grid; gap:1rem; margin-top:2rem; grid-template-columns:1fr 1fr; }
+  @media (min-width:820px){ .stats { grid-template-columns:repeat(4,1fr); } }
+  .stat { border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:1.1rem 1.2rem; }
+  .stat b { display:block; font-family:var(--font-serif); font-weight:600; font-size:clamp(1.9rem,4vw,2.6rem); line-height:1.1; color:var(--accent); }
+  .stat span { display:block; margin-top:.45rem; font-size:.88rem; color:var(--text-muted); }
+  .stat i { display:block; margin-top:.5rem; font-style:normal; font-family:var(--font-mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); opacity:.75; }
+  .why-kicker { margin-top:2rem; border:1px solid var(--accent); border-radius:var(--radius); background:var(--surface); padding:1.1rem 1.3rem; font-size:.98rem; }
+
+  /* install tabs */
+  .tabs-nav { display:flex; gap:.4rem; margin-top:1.4rem; }
+  .tabs-nav button { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; padding:.45rem .9rem; border:1px solid var(--border); border-radius:6px 6px 0 0; border-bottom:none; background:var(--bg-subtle); color:var(--text-muted); cursor:pointer; }
+  .tabs-nav button[aria-selected="true"] { background:var(--surface); color:var(--text); border-color:var(--accent); }
+  .tab-panel { border:1px solid var(--border); border-radius:0 8px 8px 8px; background:var(--surface); padding:1rem 1.2rem; }
+  .tab-panel[hidden] { display:none; }
+  .tab-panel pre { margin:0; overflow-x:auto; font-family:var(--font-mono); font-size:.85rem; line-height:1.7; }
+  .tab-panel .cmt { color:var(--text-muted); }
+  .install-note { font-size:.9rem; color:var(--text-muted); margin-top:.8rem; }
+
+  /* steps */
+  .steps { display:grid; gap:.7rem; margin-top:1.5rem; grid-template-columns:1fr; }
+  @media (min-width:560px){ .steps { grid-template-columns:1fr 1fr; } }
+  @media (min-width:960px){ .steps { grid-template-columns:repeat(5,1fr); } }
+  .step { position:relative; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:1rem; }
+  .step .k { font-family:var(--font-mono); font-size:.85rem; color:var(--accent); }
+  .step h3 { font-size:1.05rem; margin:.25rem 0 0; }
+  .step p { margin:.35rem 0 0; font-size:.9rem; color:var(--text-muted); }
+
+  /* benefits */
+  .benefits { display:grid; gap:1.8rem 2rem; margin-top:2rem; grid-template-columns:1fr; }
+  @media (min-width:560px){ .benefits { grid-template-columns:1fr 1fr; } }
+  @media (min-width:920px){ .benefits { grid-template-columns:1fr 1fr 1fr; } }
+  .benefit h3 { font-size:1.25rem; }
+  .benefit h3::before { content:"› "; color:var(--accent); }
+  .benefit p { margin:.4rem 0 0; color:var(--text-muted); }
+
+  .prose { max-width:44rem; }
+  .prose h2 { font-size:clamp(1.8rem,3.5vw,2.3rem); margin:1rem 0 0; }
+  .prose p { margin-top:1rem; font-family:var(--font-serif); font-size:1.2rem; line-height:1.5; color:var(--text-muted); }
+  .prose p b { color:var(--text); }
+  pre { overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-subtle); padding:1rem 1.2rem; font-family:var(--font-mono); font-size:.9rem; color:var(--text); margin-top:1.4rem; }
+
+  footer { border-top:1px solid var(--border); padding-block:1.6rem; }
+  footer .wrap { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.6rem; }
+  .margin-note { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; color:var(--text-muted); }
+
+  .tiers { display:grid; gap:1.2rem; margin-top:2rem; grid-template-columns:1fr; }
+  @media (min-width:820px){ .tiers { grid-template-columns:repeat(3,1fr); } }
+  .tier { border:1px solid var(--border); border-radius:12px; background:var(--surface); padding:1.6rem 1.4rem; display:flex; flex-direction:column; gap:.85rem; }
+  .tier.feature { border-color:var(--accent); box-shadow:0 8px 30px rgba(0,0,0,.08); }
+  .tier .badge { align-self:flex-start; font-family:var(--font-mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:.2rem .55rem; border-radius:999px; border:1px solid var(--border); color:var(--text-muted); }
+  .tier .badge.now { border-color:var(--solid); color:var(--solid); }
+  .tier .badge.soon { border-color:var(--accent); color:var(--accent); }
+  .tier h3 { font-family:var(--font-serif); font-size:1.35rem; margin:0; }
+  .tier .price { font-family:var(--font-serif); font-size:1.55rem; color:var(--text); margin:0; }
+  .tier .price small { font-family:var(--font-sans); font-size:.85rem; color:var(--text-muted); font-weight:400; }
+  .tier .who { font-size:.9rem; color:var(--text-muted); margin:-.35rem 0 0; }
+  .tier ul { list-style:none; margin:.3rem 0 0; padding:0; display:flex; flex-direction:column; gap:.5rem; font-size:.92rem; }
+  .tier li { padding-left:1.2rem; position:relative; }
+  .tier li::before { content:"›"; position:absolute; left:0; color:var(--accent); }
+  .tier .btn { margin-top:auto; justify-content:center; }
+
+  /* Contextia: its own brand (coral #ff5f57 + JetBrains Mono, from contextia.dev),
+     links to the engine, explains on hover */
+  .cxt { color:#ff5f57; font-family:var(--font-mono); font-weight:600; font-size:.94em; letter-spacing:-.01em; text-decoration:none; border-bottom:1.5px dotted #ff5f57; position:relative; white-space:nowrap; cursor:help; }
+  .cxt:hover, .cxt:focus-visible { color:#ff8f7a; border-bottom-color:#ff8f7a; }
+  .cxt sup { font-size:.6em; font-weight:700; color:#ff5f57; margin-left:1px; }
+  .cxt::after { content:attr(data-tip) " \2197"; position:absolute; left:0; top:calc(100% + 10px); width:min(21rem,74vw); background:var(--surface); color:var(--text-muted); border:1px solid var(--border); border-radius:10px; padding:.75rem .85rem; font-family:var(--font-sans); font-size:.8rem; font-weight:400; line-height:1.5; letter-spacing:0; text-transform:none; box-shadow:0 10px 34px rgba(0,0,0,.14); opacity:0; transform:translateY(-4px); pointer-events:none; transition:opacity .14s ease, transform .14s ease; z-index:30; white-space:normal; }
+  .cxt:hover::after, .cxt:focus-visible::after { opacity:1; transform:translateY(0); }
+
+  .calc { display:grid; gap:1.4rem; margin-top:1.8rem; grid-template-columns:1fr; align-items:center; }
+  @media (min-width:820px){ .calc { grid-template-columns:1.2fr .8fr; } }
+  .calc-inputs { display:flex; flex-direction:column; gap:1.1rem; }
+  .calc-inputs label { display:flex; flex-direction:column; gap:.5rem; font-size:.9rem; color:var(--text-muted); }
+  .calc-inputs output { font-family:var(--font-mono); color:var(--text); font-weight:700; }
+  .calc-inputs input[type=range] { accent-color:var(--accent); width:100%; }
+  .calc-out { border:1px solid var(--accent); border-radius:12px; background:var(--surface); padding:1.6rem; text-align:center; }
+  .calc-label { font-family:var(--font-mono); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin:0; }
+  .calc-big { font-family:var(--font-serif); font-size:clamp(2.4rem,6vw,3.4rem); color:var(--accent); margin:.35rem 0; line-height:1; }
+  .calc-sub { font-size:.82rem; color:var(--text-muted); margin:0; }
+
+  footer .foot { display:grid; gap:2rem; padding-block:2.6rem 1.4rem; grid-template-columns:1fr; }
+  @media (min-width:760px){ footer .foot { grid-template-columns:1.5fr 1fr; align-items:start; } }
+  .foot-tag { color:var(--text-muted); font-size:.92rem; margin:.85rem 0 1.1rem; max-width:26rem; }
+  .foot-news-l { display:block; font-family:var(--font-mono); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.5rem; }
+  .foot-news-row { display:flex; gap:.5rem; flex-wrap:wrap; }
+  .foot-news-row input { flex:1; min-width:12rem; padding:.6rem .8rem; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); color:var(--text); font-size:.9rem; }
+  .foot-news-row .btn { min-height:auto; padding-block:.55rem; }
+  .foot-links { display:flex; flex-direction:column; gap:.6rem; font-size:.9rem; }
+  .foot-links a { color:var(--text-muted); text-decoration:none; }
+  .foot-links a:hover { color:var(--text); }
+  .foot-bottom { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding-block:1.2rem; border-top:1px solid var(--border); font-family:var(--font-mono); font-size:.7rem; letter-spacing:.06em; color:var(--text-muted); }
+  @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="152.1 151.1 719.8 719.8"><path fill="currentColor" fill-rule="evenodd" d="M 447.500 206.689 C 407.907 211.820, 370.494 234.391, 349.629 265.732 C 331 293.715, 325.362 320.564, 328.993 364 C 329.522 370.325, 335.590 444.125, 342.478 528 C 349.366 611.875, 355.703 684.325, 356.560 689 C 357.417 693.675, 359.845 702.697, 361.957 709.049 C 379.288 761.179, 417.400 803.113, 457.500 814.175 C 463.990 815.965, 468.237 816.391, 480 816.430 C 496.046 816.484, 501.648 815.359, 514.622 809.477 C 543.887 796.210, 562.958 766.601, 562.992 734.381 C 563 727.285, 560.609 710.910, 559.197 708.387 C 558.696 707.492, 557.015 709.498, 554.050 714.528 C 545.630 728.811, 534.881 738.384, 521.982 743.087 C 517.376 744.766, 515.976 745.828, 514.622 748.667 C 511.975 754.217, 503.551 762.401, 497.266 765.530 C 486.493 770.892, 469.906 768.819, 460.258 760.904 C 447.208 750.199, 443.576 732.279, 451.300 716.717 L 454.677 709.915 450.611 705.207 C 448.375 702.618, 441.876 695.553, 436.169 689.507 C 430.462 683.460, 425.001 676.935, 424.033 675.007 C 423.065 673.078, 421.986 668.125, 421.633 664 C 421.281 659.875, 419.188 634, 416.982 606.500 C 412.845 554.927, 398.794 383.516, 397.008 362.828 C 394.131 329.505, 398.467 313.610, 414.989 296.908 C 429.736 282.002, 445.230 276.026, 469.184 276.008 L 478.868 276 486.184 270.488 C 498.584 261.146, 512.809 254.746, 527.431 251.932 C 530.143 251.410, 540.718 250.329, 550.931 249.531 C 569.259 248.097, 590.624 244.709, 592.426 242.951 C 593.449 241.953, 585.743 238.237, 563.097 228.807 C 535.680 217.391, 508.847 209.613, 488.026 207.045 C 480.056 206.062, 454.095 205.834, 447.500 206.689 M 648.733 215.254 C 646.658 216.531, 642.987 220.523, 640.556 224.146 C 626.312 245.379, 597.915 256.049, 546.500 259.491 C 522.055 261.127, 506.768 266.366, 490.965 278.527 C 474.057 291.538, 460.739 315.891, 463.971 327.891 C 465.139 332.231, 467.446 334.090, 471.817 334.214 C 476.757 334.354, 478.990 332.906, 484.524 325.969 C 490.752 318.165, 495.722 314.405, 504.944 310.524 C 515.369 306.136, 525.570 304.020, 541.492 302.942 C 577.137 300.530, 594.025 297.424, 610.786 290.198 C 622.933 284.961, 632.962 278.143, 642.616 268.558 C 656.355 254.917, 664.995 239.486, 665.324 228 C 665.604 218.211, 663.433 214.882, 655.896 213.541 C 653.349 213.088, 651.558 213.516, 648.733 215.254 M 636.192 286.920 C 618.314 298.890, 602.277 304.856, 575.548 309.482 L 571.596 310.166 577.048 313.493 C 591.902 322.557, 603.664 333.716, 612.584 347.206 C 628.851 371.807, 634.165 405.163, 626.374 433.772 C 625.802 435.873, 625.953 435.968, 628.391 435.041 C 633.638 433.046, 642.460 432.202, 648.338 433.132 C 663.682 435.559, 675.454 447.983, 677.532 463.944 L 678.241 469.388 679.685 466.631 C 683.349 459.638, 690.091 441.204, 692.409 431.838 C 704.108 384.576, 689.551 333.535, 652 290.161 C 648.425 286.031, 645.050 282.512, 644.500 282.340 C 643.950 282.168, 640.211 284.229, 636.192 286.920 M 478.045 709.182 C 471.545 710.325, 465.043 714.760, 461.526 720.448 C 458.805 724.849, 458.500 726.166, 458.500 733.500 C 458.500 740.834, 458.805 742.151, 461.526 746.552 C 465.763 753.405, 472.321 757.298, 480.507 757.820 C 483.969 758.040, 488.386 757.698, 490.322 757.059 C 506.920 751.581, 512.752 730.555, 501.411 717.077 C 496.333 711.042, 486.451 707.703, 478.045 709.182"/><path fill="var(--accent)" fill-rule="evenodd" d="M 632.748 443.427 C 625.233 446.108, 622.513 449.259, 615.201 463.747 C 611.384 471.311, 583.699 526.100, 553.679 585.500 C 523.659 644.900, 498.410 695.150, 497.570 697.167 L 496.042 700.835 500.329 703.347 C 509.340 708.628, 516.624 719.028, 517.705 728.157 C 518.032 730.919, 518.864 733.394, 519.553 733.659 C 521.357 734.351, 528.435 730.506, 533.080 726.309 C 539.584 720.433, 546.937 708.231, 562.795 677 C 571.034 660.775, 597.359 609.795, 621.295 563.710 C 645.231 517.626, 665.531 478.129, 666.407 475.940 C 668.432 470.879, 668.452 462.020, 666.449 457.218 C 661.486 445.318, 645.630 438.830, 632.748 443.427"/></symbol></svg>
+<canvas id="topo" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="#top" class="wordmark"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Ferrata</a>
+    <nav class="nav">
+      <a href="#how">How it works</a>
+      <a href="#why">Why Ferrata</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#run">Install</a>
+      <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank">GitHub</a>
+      <button id="themeBtn" type="button" aria-label="Toggle theme">☾</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Knowledge transfer · onboarding</span>
+        <h1>Onboarding has never<br>been this simple.</h1>
+        <p class="lede"><b>Your data, your control.</b> Drop your knowledge base,
+          link it, or write it. Ferrata turns it into a verified onboarding path
+          in minutes, and tells you what each person actually knows.</p>
+        <div class="cta-row">
+          <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank" class="btn btn-primary">Get it on GitHub <span class="arw">&#8599;</span></a>
+          <a href="#run" class="btn btn-ghost">Install in minutes</a>
+        </div>
+        <p class="fine">Free and open source · runs on your own machine · your data never leaves.</p>
+      </div>
+      <div>
+        <div class="mock">
+          <div class="mock-bar"><i></i><i></i><i></i><span>ferrata · live demo</span></div>
+          <video class="mock-video" autoplay muted loop playsinline preload="auto"
+            aria-label="A one minute demo: a brief and a wiki link become a verified course, with tests and a readiness dashboard">
+            <source src="ferrata-demo.mp4" type="video/mp4" />
+            <source src="ferrata-demo.webm" type="video/webm" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <span class="eyebrow">Rig a path in five steps &middot; about ten minutes end to end</span>
+      <div class="steps">
+        <div class="step"><span class="k">1</span><h3>Material</h3><p>drop files, link your wiki, point it at a repo, or just write it</p></div>
+        <div class="step"><span class="k">2</span><h3>Questions</h3><p>it asks what it needs to know</p></div>
+        <div class="step"><span class="k">3</span><h3>Plan</h3><p>review and trim before it builds</p></div>
+        <div class="step"><span class="k">4</span><h3>Build</h3><p>verified modules, sources cited</p></div>
+        <div class="step"><span class="k">5</span><h3>Ready</h3><p>test what each person knows</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.3rem)">Everything you need to onboard a team.</h2>
+      <div class="benefits">
+        <div class="benefit"><h3>Drop, link, or write</h3><p>Files, a link to your wiki or knowledge base, a code repository, or just type it. It grounds on your material and cites every source.</p></div>
+        <div class="benefit"><h3>Review before it builds</h3><p>See the plan, trim what you don’t need. You only build the modules you keep.</p></div>
+        <div class="benefit"><h3>Your secrets stay in</h3><p><a class="cxt" href="https://github.com/sbr0nch/contextia" rel="noopener" target="_blank" data-tip="Ferrata's open DLP engine. It strips secrets before any model sees them, and protects internal IPs and hostnames, restoring them into the finished course.">Contextia<sup>?</sup></a> strips keys and tokens before any model sees them; internal IPs and hostnames are protected, then restored into the course.</p></div>
+        <div class="benefit"><h3>Honest readiness</h3><p>Not a completion bar. What each person actually knows: solid, shaky, or untested. And the dangerous “sure and wrong”.</p></div>
+        <div class="benefit"><h3>A team in minutes</h3><p>Generate once, onboard many. Assign it, set a deadline for each person, watch readiness.</p></div>
+        <div class="benefit"><h3>Your data, your control</h3><p>Runs where your knowledge lives: local or your own server. Nothing has to leave.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <span class="eyebrow">The problem, in numbers</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.3rem)">Onboarding is broken. Measurably.</h2>
+      <div class="stats">
+        <div class="stat"><b>12%</b><span>of employees say their company does a great job onboarding new people</span><i>Gallup</i></div>
+        <div class="stat"><b>62%</b><span>of new hires call the training on their actual job inadequate</span><i>BambooHR</i></div>
+        <div class="stat"><b>~12 mo</b><span>for a new hire to reach full productivity, mostly self-taught from scattered docs</span><i>Gallup</i></div>
+        <div class="stat"><b>90%</b><span>of untested training is forgotten within a week</span><i>learning research</i></div>
+      </div>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:2.4rem">
+        The fix is not more content. Course generators write pages but never check what stuck.
+        Learning platforms count completions, which say nothing. Before building Ferrata we
+        studied fifteen commercial platforms and the entire open-source landscape:
+        <b>not one combines the five things below.</b>
+      </p>
+      <div class="benefits">
+        <div class="benefit"><h3>Cites its sources</h3><p>Every module links back to the material it came from. No made-up training.</p></div>
+        <div class="benefit"><h3>You approve the plan</h3><p>Review and trim the concept map before a single module is written.</p></div>
+        <div class="benefit"><h3>Tests where they belong</h3><p>Scenario questions after every concept, not a quiz dumped at the end.</p></div>
+        <div class="benefit"><h3>Knowledge that stays</h3><p>Spaced repetition brings each concept back right before it fades.</p></div>
+        <div class="benefit"><h3>Readiness, not completion</h3><p>Solid, shaky, untested, and the dangerous &ldquo;sure and wrong&rdquo;, per person.</p></div>
+        <div class="benefit"><h3>Yours, entirely</h3><p>Self-hosted, your own AI key, inference at cost. Nothing to subscribe to.</p></div>
+      </div>
+      <p class="why-kicker"><b>An honest claim:</b> verified knowledge is a leading indicator of
+        performance, not a guarantee of it. Tools that promise more are measuring less.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <span class="eyebrow">Your data, your control</span>
+      <h2>It runs where your knowledge lives.</h2>
+      <p>Local, or on your own server. Nothing has to leave. Sensitive material passes
+        through <a class="cxt" href="https://github.com/sbr0nch/contextia" rel="noopener" target="_blank" data-tip="Ferrata's open DLP engine. It strips secrets before any model sees them, and protects internal IPs and hostnames, restoring them into the finished course.">Contextia<sup>?</sup></a>: secrets are stripped before any model sees them; internal
+        addresses and server names are protected, then put back into the finished course.
+        You don’t depend on any single AI vendor. Ferrata just orchestrates.</p>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <span class="eyebrow">Pricing</span>
+      <h2>Free to run. Pay only when your team needs the controls.</h2>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:1rem">
+        Ferrata is free and self-hosted. You bring your own AI key, so generation
+        runs at cost with no markup and your data never leaves. Organisation
+        controls are on the way, and one promise holds either way:
+        <b>what ships free stays free.</b>
+      </p>
+      <div class="tiers">
+        <div class="tier feature">
+          <span class="badge now">Available now</span>
+          <h3>Free</h3>
+          <p class="price">&euro;0 <small>&middot; you host it</small></p>
+          <p class="who">For individuals and teams who host it themselves. The whole product, not a trial.</p>
+          <ul>
+            <li>Author, generate and study verified courses</li>
+            <li>Roster, assignments and a deadline for each person</li>
+            <li>Readiness dashboard: solid, shaky, untested, &ldquo;sure and wrong&rdquo;</li>
+            <li>Spaced repetition built in</li>
+            <li>Bring your own AI key, any major provider, or a local model</li>
+            <li><a class="cxt" href="https://github.com/sbr0nch/contextia" rel="noopener" target="_blank" data-tip="Ferrata's open DLP engine. It strips secrets before any model sees them.">Contextia<sup>?</sup></a>: secrets stripped before any model sees them</li>
+          </ul>
+          <a href="#run" class="btn btn-primary">Install it now</a>
+        </div>
+        <div class="tier soon">
+          <span class="badge soon">Coming soon</span>
+          <h3>Teams</h3>
+          <p class="price">Coming soon</p>
+          <p class="who">For organisations that need controls around the product, not a bigger product.</p>
+          <ul>
+            <li>Everything in Free, plus:</li>
+            <li>SSO/SAML and SCIM provisioning</li>
+            <li>Central key management with per-team budgets</li>
+            <li>Separate workspaces per team, with roles</li>
+            <li>Audit log and exportable readiness reports</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="mailto:contact.sotadenis@gmail.com?subject=Ferrata%20Teams%20early%20access" class="btn btn-ghost">Get early access</a>
+        </div>
+        <div class="tier soon">
+          <span class="badge soon">Coming soon</span>
+          <h3>Enterprise</h3>
+          <p class="price">Custom</p>
+          <p class="who">For compliance, scale and full data isolation.</p>
+          <ul>
+            <li>Everything in Teams, plus:</li>
+            <li>Centrally enforced protection policies, retention and audit</li>
+            <li>Air-gapped installation support</li>
+            <li>SLA and signed DPA</li>
+          </ul>
+          <a href="mailto:contact.sotadenis@gmail.com?subject=Ferrata%20Enterprise" class="btn btn-ghost">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="save">
+    <div class="wrap">
+      <span class="eyebrow">Cost &amp; savings</span>
+      <h2>Generate once for the price of a coffee. Save days on every hire.</h2>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:1rem">
+        With your own key, a full course costs about <b>~&euro;2 once</b> on a
+        top model, and one course
+        onboards your whole team, forever. Put in your numbers:
+      </p>
+      <div class="calc">
+        <div class="calc-inputs">
+          <label>People to onboard <output id="oPeople">10</output>
+            <input id="people" type="range" min="1" max="100" value="10" />
+          </label>
+          <label>Loaded cost per person, per day (&euro;) <output id="oRate">300</output>
+            <input id="rate" type="range" min="100" max="1000" step="50" value="300" />
+          </label>
+          <label>Days each ramps up faster with a verified path <output id="oDays">5</output>
+            <input id="days" type="range" min="1" max="30" value="5" />
+          </label>
+        </div>
+        <div class="calc-out">
+          <p class="calc-label">You save, roughly</p>
+          <p class="calc-big" id="saved">&euro;15,000</p>
+          <p class="calc-sub">per onboarding round &middot; generation cost: <b>~&euro;2</b></p>
+        </div>
+      </div>
+      <p class="fine">These are <b>your</b> assumptions, not our claims. Move the
+        sliders: even one day saved per hire dwarfs the cost of generating the course.</p>
+    </div>
+  </section>
+
+  <section class="section" id="run">
+    <div class="wrap prose">
+      <span class="eyebrow">Run it yourself</span>
+      <h2>Install it in minutes.</h2>
+      <p style="font-family:var(--font-sans); font-size:1.0625rem">Node and SQLite, no external
+        service required. It runs on a laptop or a modest company VM, no GPU. Clone it, install,
+        start: that is the whole setup.</p>
+      <div class="tabs" data-tabs>
+        <div class="tabs-nav" role="tablist" aria-label="Choose your platform">
+          <button role="tab" id="tab-nix" aria-controls="panel-nix" aria-selected="true">Linux / macOS</button>
+          <button role="tab" id="tab-win" aria-controls="panel-win" aria-selected="false">Windows</button>
+          <button role="tab" id="tab-docker" aria-controls="panel-docker" aria-selected="false">Docker</button>
+        </div>
+        <div class="tab-panel" id="panel-nix" role="tabpanel" aria-labelledby="tab-nix">
+<pre><code><span class="cmt"># needs Node 22+ and git</span>
+git clone https://github.com/getferrata/ferrata.git
+cd ferrata
+corepack enable pnpm
+pnpm install
+pnpm dev</code></pre>
+        </div>
+        <div class="tab-panel" id="panel-win" role="tabpanel" aria-labelledby="tab-win" hidden>
+<pre><code><span class="cmt"># PowerShell. If you have Node 22+ and git, skip the first line</span>
+winget install OpenJS.NodeJS.LTS Git.Git
+git clone https://github.com/getferrata/ferrata.git
+cd ferrata
+corepack enable pnpm
+pnpm install
+pnpm dev</code></pre>
+        </div>
+        <div class="tab-panel" id="panel-docker" role="tabpanel" aria-labelledby="tab-docker" hidden>
+<pre><code><span class="cmt"># with Docker installed, nothing else is needed on the machine</span>
+git clone https://github.com/getferrata/ferrata.git
+cd ferrata
+docker compose up -d --build</code></pre>
+        </div>
+      </div>
+      <p class="install-note">Then open <b>http://localhost:3000</b>. The first account you
+        register becomes the author. In Settings, paste an AI key from any major provider, or
+        point it at a local model server, and you are ready to rig your first path.</p>
+      <div class="cta-row">
+        <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank" class="btn btn-primary">Get it on GitHub <span class="arw">&#8599;</span></a>
+      </div>
+      <p class="fine">Hosted and managed is coming too, for teams who would rather not host it
+        themselves. Same engine, your data still isolated.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <span class="wordmark"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg>Ferrata</span>
+      <p class="foot-tag">Verified onboarding from your own knowledge. Your data, your control.</p>
+      <form class="foot-news" action="https://formsubmit.co/contact.sotadenis@gmail.com" method="POST">
+        <label class="foot-news-l" for="nlemail">Get product updates</label>
+        <input type="hidden" name="_subject" value="New Ferrata subscriber" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+        <div class="foot-news-row">
+          <input id="nlemail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </form>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#save">Cost &amp; savings</a>
+      <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank">GitHub</a>
+      <a href="privacy.html">Privacy &amp; cookies</a>
+      <a href="mailto:contact.sotadenis@gmail.com">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>&copy; 2026 Ferrata</span>
+    <span>your data, your control &middot; sovereign &middot; v1 beta</span>
+  </div>
+</footer>
+
+<script>
+  // install tabs
+  (function () {
+    var box = document.querySelector("[data-tabs]"); if (!box) return;
+    var tabs = box.querySelectorAll("[role=tab]");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+        });
+      });
+    });
+  })();
+
+  // theme toggle
+  (function () {
+    var root = document.documentElement, btn = document.getElementById("themeBtn");
+    var saved = null;
+    try { saved = localStorage.getItem("ferrata-theme"); } catch (e) {}
+    if (saved) root.setAttribute("data-theme", saved);
+    function isDark() {
+      var t = root.getAttribute("data-theme");
+      if (t) return t === "dark";
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    function sync() { btn.textContent = isDark() ? "☀" : "☾"; }
+    sync();
+    btn.addEventListener("click", function () {
+      var next = isDark() ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("ferrata-theme", next); } catch (e) {}
+      sync(); draw();
+    });
+  })();
+
+  // topographic contour background
+  (function () {
+    var c = document.getElementById("topo"); if (!c || !c.getContext) return;
+    var ctx = c.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    window.draw = function () {
+      var w = innerWidth, h = innerHeight;
+      c.width = w * dpr; c.height = h * dpr; c.style.width = w + "px"; c.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--border").trim() || "#d8d0bf";
+      ctx.lineWidth = 1;
+      var lines = 16, p1 = w * 0.24, p2 = w * 0.8;
+      for (var i = 0; i < lines; i++) {
+        var baseY = (h / (lines - 1)) * i;
+        ctx.globalAlpha = 0.5 - Math.abs(i - lines / 2) / lines * 0.35;
+        ctx.beginPath();
+        for (var x = 0; x <= w; x += 6) {
+          var d1 = Math.exp(-Math.pow((x - p1) / (w * 0.22), 2));
+          var d2 = Math.exp(-Math.pow((x - p2) / (w * 0.28), 2));
+          var y = baseY - 46 * d1 * Math.cos((i - lines / 2) * 0.55) - 60 * d2 * Math.cos((i - lines / 2) * 0.42) + 6 * Math.sin(x / 120 + i);
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    };
+    draw();
+    var t; addEventListener("resize", function () { clearTimeout(t); t = setTimeout(draw, 150); });
+  })();
+
+  // savings calculator
+  (function () {
+    var p = document.getElementById("people"), r = document.getElementById("rate"), d = document.getElementById("days");
+    if (!p) return;
+    var oP = document.getElementById("oPeople"), oR = document.getElementById("oRate"), oD = document.getElementById("oDays");
+    var out = document.getElementById("saved");
+    function upd() {
+      oP.textContent = p.value; oR.textContent = r.value; oD.textContent = d.value;
+      var saved = (+p.value) * (+r.value) * (+d.value);
+      out.textContent = "€" + Math.round(saved).toLocaleString("en-US");
+    }
+    [p, r, d].forEach(function (el) { el.addEventListener("input", upd); });
+    upd();
+  })();
+
+</script>
+</body>
+</html>

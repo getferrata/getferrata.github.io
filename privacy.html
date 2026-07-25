@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ferrata · Privacy &amp; cookies</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<style>
+  :root {
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+    --bg:#f5f1e8; --surface:#fbf8f1; --border:#d8d0bf; --text:#221f1a; --text-muted:#5f584b; --accent:#a83232;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#17150f; --surface:#201d16; --border:#37322a; --text:#ece6d8; --text-muted:#a79c87; --accent:#e0705f;
+  }}
+  :root[data-theme="dark"] { --bg:#17150f; --surface:#201d16; --border:#37322a; --text:#ece6d8; --text-muted:#a79c87; --accent:#e0705f; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; flex-direction:column; background:var(--bg); color:var(--text);
+    font-family:var(--font-sans); font-size:1.0625rem; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { width:min(42rem, 100% - 2.5rem); margin-inline:auto; }
+  .topbar { border-bottom:1px solid var(--border); }
+  .topbar .wrap { display:flex; align-items:center; justify-content:space-between; padding-block:.9rem; }
+  .wordmark { font-family:var(--font-mono); font-weight:700; letter-spacing:.34em; font-size:.9rem; text-transform:uppercase; text-decoration:none; color:var(--text); display:inline-flex; align-items:center; gap:.6rem; }
+  .mark { width:1.3rem; height:1.3rem; color:var(--text); }
+  .back { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; color:var(--text-muted); text-decoration:underline; text-underline-offset:2px; }
+  main { flex:1; padding-block:3rem 4rem; }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-family:var(--font-serif); font-weight:600; letter-spacing:-.015em; font-size:clamp(2rem,5vw,2.7rem); margin:.6rem 0 0; }
+  h2 { font-family:var(--font-serif); font-weight:600; font-size:1.3rem; margin:2.2rem 0 .5rem; }
+  p, li { color:var(--text-muted); }
+  a { color:var(--accent); }
+  .updated { font-family:var(--font-mono); font-size:.72rem; color:var(--text-muted); margin-top:.6rem; }
+  footer { border-top:1px solid var(--border); }
+  footer .wrap { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding-block:1.3rem; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.06em; color:var(--text-muted); }
+  footer a { color:inherit; }
+</style>
+<script>(function(){try{var t=localStorage.getItem('ferrata-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a href="index.html" class="wordmark"><svg class="mark" viewBox="152.1 151.1 719.8 719.8" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 447.500 206.689 C 407.907 211.820, 370.494 234.391, 349.629 265.732 C 331 293.715, 325.362 320.564, 328.993 364 C 329.522 370.325, 335.590 444.125, 342.478 528 C 349.366 611.875, 355.703 684.325, 356.560 689 C 357.417 693.675, 359.845 702.697, 361.957 709.049 C 379.288 761.179, 417.400 803.113, 457.500 814.175 C 463.990 815.965, 468.237 816.391, 480 816.430 C 496.046 816.484, 501.648 815.359, 514.622 809.477 C 543.887 796.210, 562.958 766.601, 562.992 734.381 C 563 727.285, 560.609 710.910, 559.197 708.387 C 558.696 707.492, 557.015 709.498, 554.050 714.528 C 545.630 728.811, 534.881 738.384, 521.982 743.087 C 517.376 744.766, 515.976 745.828, 514.622 748.667 C 511.975 754.217, 503.551 762.401, 497.266 765.530 C 486.493 770.892, 469.906 768.819, 460.258 760.904 C 447.208 750.199, 443.576 732.279, 451.300 716.717 L 454.677 709.915 450.611 705.207 C 448.375 702.618, 441.876 695.553, 436.169 689.507 C 430.462 683.460, 425.001 676.935, 424.033 675.007 C 423.065 673.078, 421.986 668.125, 421.633 664 C 421.281 659.875, 419.188 634, 416.982 606.500 C 412.845 554.927, 398.794 383.516, 397.008 362.828 C 394.131 329.505, 398.467 313.610, 414.989 296.908 C 429.736 282.002, 445.230 276.026, 469.184 276.008 L 478.868 276 486.184 270.488 C 498.584 261.146, 512.809 254.746, 527.431 251.932 C 530.143 251.410, 540.718 250.329, 550.931 249.531 C 569.259 248.097, 590.624 244.709, 592.426 242.951 C 593.449 241.953, 585.743 238.237, 563.097 228.807 C 535.680 217.391, 508.847 209.613, 488.026 207.045 C 480.056 206.062, 454.095 205.834, 447.500 206.689 M 648.733 215.254 C 646.658 216.531, 642.987 220.523, 640.556 224.146 C 626.312 245.379, 597.915 256.049, 546.500 259.491 C 522.055 261.127, 506.768 266.366, 490.965 278.527 C 474.057 291.538, 460.739 315.891, 463.971 327.891 C 465.139 332.231, 467.446 334.090, 471.817 334.214 C 476.757 334.354, 478.990 332.906, 484.524 325.969 C 490.752 318.165, 495.722 314.405, 504.944 310.524 C 515.369 306.136, 525.570 304.020, 541.492 302.942 C 577.137 300.530, 594.025 297.424, 610.786 290.198 C 622.933 284.961, 632.962 278.143, 642.616 268.558 C 656.355 254.917, 664.995 239.486, 665.324 228 C 665.604 218.211, 663.433 214.882, 655.896 213.541 C 653.349 213.088, 651.558 213.516, 648.733 215.254 M 636.192 286.920 C 618.314 298.890, 602.277 304.856, 575.548 309.482 L 571.596 310.166 577.048 313.493 C 591.902 322.557, 603.664 333.716, 612.584 347.206 C 628.851 371.807, 634.165 405.163, 626.374 433.772 C 625.802 435.873, 625.953 435.968, 628.391 435.041 C 633.638 433.046, 642.460 432.202, 648.338 433.132 C 663.682 435.559, 675.454 447.983, 677.532 463.944 L 678.241 469.388 679.685 466.631 C 683.349 459.638, 690.091 441.204, 692.409 431.838 C 704.108 384.576, 689.551 333.535, 652 290.161 C 648.425 286.031, 645.050 282.512, 644.500 282.340 C 643.950 282.168, 640.211 284.229, 636.192 286.920 M 478.045 709.182 C 471.545 710.325, 465.043 714.760, 461.526 720.448 C 458.805 724.849, 458.500 726.166, 458.500 733.500 C 458.500 740.834, 458.805 742.151, 461.526 746.552 C 465.763 753.405, 472.321 757.298, 480.507 757.820 C 483.969 758.040, 488.386 757.698, 490.322 757.059 C 506.920 751.581, 512.752 730.555, 501.411 717.077 C 496.333 711.042, 486.451 707.703, 478.045 709.182"/><path fill="var(--accent)" fill-rule="evenodd" d="M 632.748 443.427 C 625.233 446.108, 622.513 449.259, 615.201 463.747 C 611.384 471.311, 583.699 526.100, 553.679 585.500 C 523.659 644.900, 498.410 695.150, 497.570 697.167 L 496.042 700.835 500.329 703.347 C 509.340 708.628, 516.624 719.028, 517.705 728.157 C 518.032 730.919, 518.864 733.394, 519.553 733.659 C 521.357 734.351, 528.435 730.506, 533.080 726.309 C 539.584 720.433, 546.937 708.231, 562.795 677 C 571.034 660.775, 597.359 609.795, 621.295 563.710 C 645.231 517.626, 665.531 478.129, 666.407 475.940 C 668.432 470.879, 668.452 462.020, 666.449 457.218 C 661.486 445.318, 645.630 438.830, 632.748 443.427"/></svg>Ferrata</a>
+  <a class="back" href="index.html">Back to site</a>
+</div></header>
+
+<main><div class="wrap">
+  <span class="eyebrow">Legal</span>
+  <h1>Privacy &amp; cookies</h1>
+  <p class="updated">Last updated: July 2026</p>
+
+  <h2>The short version</h2>
+  <p>Ferrata is built around one idea: your data stays yours. This site collects
+    nothing unless you choose to contact us, and the Ferrata software runs on your
+    own infrastructure, so your material never reaches us.</p>
+
+  <h2>This website</h2>
+  <p>This marketing site is a static page. It sets <b>no tracking or advertising
+    cookies</b> and runs no third party analytics. The only thing stored is your
+    light or dark theme choice, kept locally in your browser and never sent to us.
+    You can clear it any time from your browser settings.</p>
+
+  <h2>When you contact us or subscribe</h2>
+  <p>If you email us, join the early access list, or ask for product updates, we
+    receive the email address and message you send. We use it only to reply and to
+    send you what you asked for. We do not sell it or share it. Ask us to remove
+    you at any time and we will.</p>
+
+  <h2>The Ferrata software</h2>
+  <p>When you self host Ferrata, it runs on your own machine or server. Your
+    documents, courses, and learners live in your local database. We do not receive
+    them. The AI provider is your choice, using your own key, so generation happens
+    under your account and your data policy, not ours. Sensitive values are stripped
+    by the built in DLP layer before any model sees your material.</p>
+
+  <h2>Your rights</h2>
+  <p>You can ask what we hold about you, ask for a copy, or ask us to delete it.
+    Write to <a href="mailto:contact.sotadenis@gmail.com">contact.sotadenis@gmail.com</a>.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, we will update the date above. For a beta product,
+    expect it to grow more detailed over time.</p>
+</div></main>
+
+<footer><div class="wrap">
+  <span>&copy; 2026 Ferrata</span>
+  <span><a href="index.html">Home</a> &middot; <a href="mailto:contact.sotadenis@gmail.com">Contact</a></span>
+</div></footer>
+</body>
+</html>
