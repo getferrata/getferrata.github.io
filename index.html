@@ -413,10 +413,9 @@ pnpm install
 pnpm dev</code></pre>
         </div>
         <div class="tab-panel" id="panel-docker" role="tabpanel" aria-labelledby="tab-docker" hidden>
-<pre><code><span class="cmt"># with Docker installed, nothing else is needed on the machine</span>
-git clone https://github.com/getferrata/ferrata.git
-cd ferrata
-docker compose up -d --build</code></pre>
+<pre><code><span class="cmt"># one command, nothing to clone or build</span>
+docker run -d --name ferrata -p 3000:3000 -v ferrata-data:/data ghcr.io/getferrata/ferrata:latest
+<span class="cmt"># prefer building from source? clone the repo and: docker compose up -d --build</span></code></pre>
         </div>
       </div>
       <p class="install-note">Then open <b>http://localhost:3000</b>. The first account you
