@@ -263,10 +263,16 @@
         <div class="stat"><b>90%</b><span>of untested training is forgotten within a week</span><i>learning research</i></div>
       </div>
       <p class="prose" style="font-family:var(--font-sans); margin-top:2.4rem">
-        The fix is not more content. Course generators write pages but never check what stuck.
+        Ferrata does not order laptops, issue badges or chase signatures: plenty of tools do
+        that well, and they do it in an afternoon. It takes on the part that costs months,
+        <b>getting what lives in your docs and in your team's heads into a new person's head</b>,
+        and proving it landed.
+      </p>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:1.2rem">
+        More content is not the fix. Course generators write pages but never check what stuck.
         Learning platforms count completions, which say nothing. Before building Ferrata we
         studied fifteen commercial platforms and the entire open-source landscape:
-        <b>not one combines the five things below.</b>
+        <b>not one combines the six things below.</b>
       </p>
       <div class="benefits">
         <div class="benefit"><h3>Cites its sources</h3><p>Every module links back to the material it came from. No made-up training.</p></div>
@@ -387,8 +393,8 @@
       <span class="eyebrow">Run it yourself</span>
       <h2>Install it in minutes.</h2>
       <p style="font-family:var(--font-sans); font-size:1.0625rem">Node and SQLite, no external
-        service required. It runs on a laptop or a modest company VM, no GPU. Clone it, install,
-        start: that is the whole setup.</p>
+        service required. It runs on a laptop or a modest company VM, no GPU. Clone it and start
+        it, or pull the image: either way you are a few lines from running.</p>
       <div class="tabs" data-tabs>
         <div class="tabs-nav" role="tablist" aria-label="Choose your platform">
           <button role="tab" id="tab-nix" aria-controls="panel-nix" aria-selected="true">Linux / macOS</button>
@@ -414,13 +420,19 @@ pnpm dev</code></pre>
         </div>
         <div class="tab-panel" id="panel-docker" role="tabpanel" aria-labelledby="tab-docker" hidden>
 <pre><code><span class="cmt"># one command, nothing to clone or build</span>
-docker run -d --name ferrata -p 3000:3000 -v ferrata-data:/data ghcr.io/getferrata/ferrata:latest
-<span class="cmt"># prefer building from source? clone the repo and: docker compose up -d --build</span></code></pre>
+docker run -d --name ferrata -p 3000:3000 \
+  -v ferrata-data:/data ghcr.io/getferrata/ferrata:latest
+
+<span class="cmt"># building from source instead? clone the repo, then:</span>
+docker compose up -d --build</code></pre>
         </div>
       </div>
       <p class="install-note">Then open <b>http://localhost:3000</b>. The first account you
         register becomes the author. In Settings, paste an AI key from any major provider, or
         point it at a local model server, and you are ready to rig your first path.</p>
+      <p class="install-note">Putting it on a server? The
+        <a href="https://github.com/getferrata/ferrata/blob/main/DEPLOY.md" rel="noopener" target="_blank">deployment guide</a>
+        covers systemd, TLS, log rotation, backups and installs on machines with no internet access.</p>
       <div class="cta-row">
         <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank" class="btn btn-primary">Get it on GitHub <span class="arw">&#8599;</span></a>
       </div>
