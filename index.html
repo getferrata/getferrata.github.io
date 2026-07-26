@@ -229,7 +229,7 @@
     <div class="wrap">
       <span class="eyebrow">Rig a path in five steps &middot; about ten minutes end to end</span>
       <div class="steps">
-        <div class="step"><span class="k">1</span><h3>Material</h3><p>drop files, link your wiki, point it at a repo, or just write it</p></div>
+        <div class="step"><span class="k">1</span><h3>Material</h3><p>drop files, link your wiki, point it at a checkout on disk, or just write it</p></div>
         <div class="step"><span class="k">2</span><h3>Questions</h3><p>it asks what it needs to know</p></div>
         <div class="step"><span class="k">3</span><h3>Plan</h3><p>review and trim before it builds</p></div>
         <div class="step"><span class="k">4</span><h3>Build</h3><p>verified modules, sources cited</p></div>
@@ -242,7 +242,7 @@
     <div class="wrap">
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.3rem)">Everything you need to onboard a team.</h2>
       <div class="benefits">
-        <div class="benefit"><h3>Drop, link, or write</h3><p>Files, a link to your wiki or knowledge base, a code repository, or just type it. It grounds on your material and cites every source.</p></div>
+        <div class="benefit"><h3>Drop, link, or write</h3><p>Files, a link to your wiki or knowledge base, a checkout of your code already on the machine, or just type it. It grounds on your material and cites every source.</p></div>
         <div class="benefit"><h3>Review before it builds</h3><p>See the plan, trim what you don’t need. You only build the modules you keep.</p></div>
         <div class="benefit"><h3>Your secrets stay in</h3><p><a class="cxt" href="https://github.com/sbr0nch/contextia" rel="noopener" target="_blank" data-tip="Ferrata's open DLP engine. It strips secrets before any model sees them, and protects internal IPs and hostnames, restoring them into the finished course.">Contextia<sup>?</sup></a> strips keys and tokens before any model sees them; internal IPs and hostnames are protected, then restored into the course.</p></div>
         <div class="benefit"><h3>Honest readiness</h3><p>Not a completion bar. What each person actually knows: solid, shaky, or untested. And the dangerous “sure and wrong”.</p></div>
@@ -428,7 +428,9 @@ docker compose up -d --build</code></pre>
         </div>
       </div>
       <p class="install-note">Then open <b>http://localhost:3000</b>. The first account you
-        register becomes the author. In Settings, paste an AI key from any major provider, or
+        register becomes the author and sign-ups close behind it: after that, people come in
+        through invite links you create, and the link decides whether they arrive as a learner
+        or as someone who can build. In Settings, paste an AI key from any major provider, or
         point it at a local model server, and you are ready to rig your first path.</p>
       <p class="install-note">Putting it on a server? The
         <a href="https://github.com/getferrata/ferrata/blob/main/DEPLOY.md" rel="noopener" target="_blank">deployment guide</a>
