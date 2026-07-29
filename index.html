@@ -440,18 +440,21 @@
         </div>
         <div class="tab-panel" id="panel-nix" role="tabpanel" aria-labelledby="tab-nix">
 <pre><code><span class="cmt"># needs Node 22+ and git</span>
+npm install -g pnpm@10
 git clone https://github.com/getferrata/ferrata.git
 cd ferrata
-corepack enable pnpm
 pnpm install
 pnpm dev</code></pre>
         </div>
         <div class="tab-panel" id="panel-win" role="tabpanel" aria-labelledby="tab-win" hidden>
-<pre><code><span class="cmt"># PowerShell. If you have Node 22+ and git, skip the first line</span>
-winget install OpenJS.NodeJS.LTS Git.Git
+<pre><code><span class="cmt"># PowerShell. Already have Node 22+ and git? Start at npm install.</span>
+winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements
+winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
+
+<span class="cmt"># Close this window and open a new PowerShell, so it picks up the new PATH.</span>
+npm install -g pnpm@10
 git clone https://github.com/getferrata/ferrata.git
 cd ferrata
-corepack enable pnpm
 pnpm install
 pnpm dev</code></pre>
         </div>
