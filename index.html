@@ -189,6 +189,7 @@
     <nav class="nav">
       <a href="#how">How it works</a>
       <a href="#why">Why Ferrata</a>
+      <a href="#measured">Measured</a>
       <a href="#pricing">Pricing</a>
       <a href="#run">Install</a>
       <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank">GitHub</a>
@@ -295,6 +296,42 @@
         through <a class="cxt" href="https://github.com/sbr0nch/contextia" rel="noopener" target="_blank" data-tip="Ferrata's open DLP engine. It strips secrets before any model sees them, and protects internal IPs and hostnames, restoring them into the finished course.">Contextia<sup>?</sup></a>: secrets are stripped before any model sees them; internal
         addresses and server names are protected, then put back into the finished course.
         You don’t depend on any single AI vendor. Ferrata just orchestrates.</p>
+    </div>
+  </section>
+
+  <section class="section" id="measured">
+    <div class="wrap">
+      <span class="eyebrow">Measured, not asserted</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.3rem)">Every number here is reproducible.</h2>
+      <div class="stats">
+        <div class="stat"><b>526</b><span>automated tests on every build: 470 unit, 56 full journeys through the real pipeline</span><i>pnpm vitest run &middot; pnpm test:e2e</i></div>
+        <div class="stat"><b>0</b><span>secrets leaked on the fixture, in every author setting, because the operator floor clamps the choice up</span><i>data protection suite</i></div>
+        <div class="stat"><b>~30 min</b><span>for a five module grounded course with its tests, from a 3B local model on a 4 vCPU VM with no GPU</span><i>self host benchmark</i></div>
+        <div class="stat"><b>$0.28</b><span>a module on a hosted model, for one course built from a repository of 131 files</span><i>the install's own ledger</i></div>
+      </div>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:2.4rem">
+        The end to end suite drives the whole thing, background worker included, against a
+        deterministic mock model: it verifies the real flow in a couple of minutes without
+        spending a cent on a provider. Clone the repository and run the four commands
+        yourself.
+      </p>
+      <p class="prose" style="font-family:var(--font-sans); margin-top:1.2rem">
+        <b>What that price is, and is not.</b> It is one course, from one repository, on one
+        budget: 14 modules and 52 test questions. It is not a price list. Grounded generation
+        carries the retrieved excerpts into every module call, so a course written from a short
+        brief costs materially less than one built on a codebase. Generation is billed to your
+        own key, and every course shows a receipt of what it actually spent beside the estimate
+        it gave you beforehand, so the number can be checked against your provider invoice
+        rather than believed.
+      </p>
+      <div class="benefits" style="margin-top:2.4rem">
+        <div class="benefit"><h3>Try a model before you spend on it</h3><p>One button puts a small module through all eight stages of the pipeline with the models you picked, and reports what each one cost. A few hundred tokens, so a model that does not suit Ferrata costs a fraction of a cent to find out about instead of half a course.</p></div>
+        <div class="benefit"><h3>The ledger is the receipt</h3><p>Every call is recorded with its tokens, its cost, and the reason it was discarded if it was. The estimate shown before you build comes from the same numbers, so it can be wrong in public rather than quietly.</p></div>
+      </div>
+      <p class="why-kicker"><b>An honest limit:</b> the hosted-model figure is a single course.
+        The local rows are one run each and stay provisional until there are five. Everything
+        above traces to a file in the repository; nothing here is an estimate dressed as a
+        measurement.</p>
     </div>
   </section>
 
@@ -463,6 +500,7 @@ docker compose up -d --build</code></pre>
     </div>
     <nav class="foot-links" aria-label="Footer">
       <a href="#how">How it works</a>
+      <a href="#measured">Measured</a>
       <a href="#pricing">Pricing</a>
       <a href="#save">Cost &amp; savings</a>
       <a href="https://github.com/getferrata/ferrata" rel="noopener" target="_blank">GitHub</a>
