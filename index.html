@@ -304,7 +304,7 @@
       <span class="eyebrow">Measured, not asserted</span>
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.3rem)">Every number here is reproducible.</h2>
       <div class="stats">
-        <div class="stat"><b>526</b><span>automated tests on every build: 470 unit, 56 full journeys through the real pipeline</span><i>pnpm vitest run &middot; pnpm test:e2e</i></div>
+        <div class="stat"><b>947</b><span>automated tests on every build: 884 unit, 63 full journeys through the real pipeline</span><i>pnpm vitest run &middot; pnpm test:e2e</i></div>
         <div class="stat"><b>0</b><span>secrets leaked on the fixture, in every author setting, because the operator floor clamps the choice up</span><i>data protection suite</i></div>
         <div class="stat"><b>~30 min</b><span>for a five module grounded course with its tests, from a 3B local model on a 4 vCPU VM with no GPU</span><i>self host benchmark</i></div>
         <div class="stat"><b>$0.28</b><span>a module on a hosted model, for one course built from a repository of 131 files</span><i>the install's own ledger</i></div>
@@ -325,7 +325,7 @@
         rather than believed.
       </p>
       <div class="benefits" style="margin-top:2.4rem">
-        <div class="benefit"><h3>Try a model before you spend on it</h3><p>One button puts a small module through all eight stages of the pipeline with the models you picked, and reports what each one cost. A few hundred tokens, so a model that does not suit Ferrata costs a fraction of a cent to find out about instead of half a course.</p></div>
+        <div class="benefit"><h3>Try a model before you spend on it</h3><p>One button puts a small module through all eight stages of the pipeline with the models you picked, and reports what each one cost. About twenty cents on a strong hosted model, nothing on a local one: a model that does not suit Ferrata costs the price of one module to find out about, instead of half a course.</p></div>
         <div class="benefit"><h3>The ledger is the receipt</h3><p>Every call is recorded with its tokens, its cost, and the reason it was discarded if it was. The estimate shown before you build comes from the same numbers, so it can be wrong in public rather than quietly.</p></div>
       </div>
       <p class="why-kicker"><b>An honest limit:</b> the hosted-model figure is a single course.
@@ -444,10 +444,12 @@ npm install -g pnpm@10
 git clone https://github.com/getferrata/ferrata.git
 cd ferrata
 pnpm install
-pnpm dev</code></pre>
+pnpm build
+pnpm start</code></pre>
         </div>
         <div class="tab-panel" id="panel-win" role="tabpanel" aria-labelledby="tab-win" hidden>
 <pre><code><span class="cmt"># PowerShell. Already have Node 22+ and git? Start at npm install.</span>
+<span class="cmt"># Smoother inside WSL2 (wsl --install -d Ubuntu): SQLite is a native module.</span>
 winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements
 winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
 
@@ -456,7 +458,8 @@ npm install -g pnpm@10
 git clone https://github.com/getferrata/ferrata.git
 cd ferrata
 pnpm install
-pnpm dev</code></pre>
+pnpm build
+pnpm start</code></pre>
         </div>
         <div class="tab-panel" id="panel-docker" role="tabpanel" aria-labelledby="tab-docker" hidden>
 <pre><code><span class="cmt"># one command, nothing to clone or build</span>
