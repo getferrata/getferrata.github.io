@@ -6,7 +6,7 @@
 
 <p align="center">
   Turn your team's knowledge into a verified onboarding course.<br />
-  Self-hosted, your own AI key, your data never leaves.
+  Self-hosted, your own AI key, and with a local model nothing leaves your machine.
 </p>
 
 <p align="center">
